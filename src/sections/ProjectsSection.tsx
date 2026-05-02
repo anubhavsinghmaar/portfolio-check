@@ -3,9 +3,9 @@ import {
   useScroll,
   useTransform,
   type MotionValue,
+  type MotionStyle,
 } from "framer-motion";
 import { useRef } from "react";
-import type { CSSProperties } from "react";
 import { LiveProjectButton } from "../components/Buttons";
 import { FadeIn } from "../components/FadeIn";
 
@@ -49,6 +49,10 @@ const projects: Project[] = [
   },
 ];
 
+type ProjectCardStyle = MotionStyle & {
+  "--card-offset": string;
+};
+
 function ProjectCard({
   project,
   index,
@@ -70,17 +74,16 @@ function ProjectCard({
     [0, 1],
     [1, targetScale],
   );
+  const cardStyle: ProjectCardStyle = {
+    scale,
+    "--card-offset": `${index * 28}px`,
+  };
 
   return (
     <div ref={containerRef} className="relative h-[85vh]">
       <motion.div
         className="sticky top-[calc(6rem+var(--card-offset))] rounded-[40px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:rounded-[50px] sm:p-6 md:top-[calc(8rem+var(--card-offset))] md:rounded-[60px] md:p-8"
-        style={
-          {
-            scale,
-            "--card-offset": `${index * 28}px`,
-          } as CSSProperties
-        }
+        style={cardStyle}
       >
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex items-start gap-4 sm:gap-6">

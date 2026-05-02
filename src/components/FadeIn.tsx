@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import type { HTMLAttributes, PropsWithChildren } from "react";
+import type { ComponentType, HTMLAttributes, PropsWithChildren } from "react";
 
 type FadeInProps = PropsWithChildren<
   HTMLAttributes<HTMLElement> & {
@@ -20,7 +20,7 @@ export function FadeIn({
   y = 30,
   ...props
 }: FadeInProps) {
-  const MotionTag = motion.create(as as never);
+  const MotionTag = motion.create(as as never) as ComponentType<any>;
 
   return (
     <MotionTag
